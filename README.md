@@ -12,7 +12,7 @@ In this section we will translate our breadth first search algorithm into code. 
 
 In breadth first search, we explore the first vertex, and visit the adjacent vertices adding each one to a queue in turn.  Then we remove the first vertex added to the queue and explore it.
 
-![](	https://s3-us-west-2.amazonaws.com/curriculum-content/algorithms/subwaydistance1.png)
+![](https://s3-us-west-2.amazonaws.com/curriculum-content/algorithms/subwaydistance1.png)
 
 Let's go back to our representation of our graph and see if we can make more progress translating this into code.
 
@@ -25,18 +25,17 @@ let edges = [
 	['34th&6th', '28th&Bwy'],
 	['28th&Bwy', '23rd&Bwy'],
 	['23rd&Bwy', '14th&Lex'],
-	['14th&Lex', '23rd&Lex'],
-	['23rd&Lex', '28th&Lex'],
-	['28th&Lex', '33rd&Lex']
+	['14th&Lex', '23rd&Lex']
 ]
 
 let vertices = [
   {name: '34th&6th', distance: null, predecessor: null},
   {name: '23rd&6th', distance: null, predecessor: null},
   {name: '14th&6th', distance: null, predecessor: null},
-  {name: '34th&6th', distance: null, predecessor: null},
   {name: '28th&Bwy', distance: null, predecessor: null},
+  {name: '23rd&Bwy', distance: null, predecessor: null},
   {name: '14th&Lex', distance: null, predecessor: null},
+  {name: '23rd&Lex', distance: null, predecessor: null},
 ]
 ```
 
