@@ -1,59 +1,48 @@
-function printString(string){
-  console.log(string[0])
-  if(string.length > 1){
-    let substring = string.substring(1, string.length)
-    printString(substring)
-  } else{
-    return true
+let edges = [
+	['14th&6th', '23rd&6th'],
+	['23rd&6th', '34th&6th'],
+	['34th&6th', '28th&Bwy'],
+	['28th&Bwy', '23rd&Bwy'],
+	['23rd&Bwy', '14th&Lex'],
+	['14th&Lex', '23rd&Lex'],
+	['23rd&Lex', '28th&Lex'],
+	['28th&Lex', '33rd&Lex']
+]
+
+function bfs(startingNode, vertices, adjacencyList){
+  let discovered = [startingNode]
+  while(discovered.length != 0){
+    let currentNode = discovered.shift()
+    let adjacentNodes = findAdjacent(currentNode.name, vertices, edges)
+    markDistanceAndPredecessor(currentNode, adjacentNodes)
+    discovered.concat(adjacentNodes)
   }
 }
 
-function reverseString(string){
-  // pizza
-  // a +
-  if(string.length > 1){
-    let substring = string.substring(0, string.length -1)
-    return string[string.length -1] + reverseString(substring)
-  } else {
-    return string
-  }
+// need to write a test for non-discovered nodes
+function findAdjacent(nodeName,  vertices, edges){
+  return edges.filter(function(edge){
+    return edge.includes(nodeName)
+  }).map(function(edge){
+    return edge.filter(function(node){
+      return (node != nodeName)
+    })[0]
+  }).map(function(name){
+    return findNode(name, vertices)
+  })
+}
+
+function markDistanceAndPredecessor(predecessor, adjacentNodes){
+  adjacentNodes.map(function(node){
+    node.distance = predecessor.distance + 1;
+    node.predecessor = predecessor;
+  })
 }
 
 
-function isPalindrome(string){
-  if(string.length < 2){
-    return true
-  } else {
-    let substring = string.substring(1, string.length - 1)
-    return (string[0] == string[string.length -1] && isPalindrome(substring))
-  }
-}
 
-function addUpTo(array, index){
-  if(index === 0){
-    return array[0]
-  } else {
-    return addUpTo(array, index-1) + array[index]
-  }
-}
-
-
-function maxOf(array){
-  if(array.length == 1){
-    return array[0]
-  } else {
-    let subArray = array.slice(0, array.length -1)
-    let currentMax = maxOf(subArray)
-    let newMax = currentMax > array[array.length -1] ? currentMax : array[array.length -1]
-    return newMax;
-  }
-}
-
-function includesNumber(array, number){
-  if(array.length < 2){
-    return (array[0] == number)
-  }else{
-    let subarray = array.slice(0, array.length - 1)
-    return(includesNumber(subarray, number) || (array[array.length -1] == number))
-  }
+function findNode(nodeName, vertices){
+  return vertices.find(function(vertex){
+    return vertex.name == nodeName
+  })
 }
