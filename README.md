@@ -1,66 +1,75 @@
-### Recursion Lab!
+## BFS Lab!
 
-It turns out that there are a lot of interesting problems that can be solved with using recursion.  
+### Objectives
 
-### Working with strings
-A string is a data structure that lends itself to recursive solutions.  Do you see why?  It's because a string consists of the string minus plus that missing letter.  
-```javascript
-  let string = 'Algorithm'
-  string === string.substring(0, string.length - 1) + string[string.length - 1]
-  // true
-```
-With the problems below use our technique of (1) choosing an example, (2) write out the solution to just that example, and then (3) reword that solution in terms of the function itself.  We can do the first two together, but feel free to try them on your own.
+* Translate the breadth first search procedure into code.
 
-1. Write a recursive function to print out all of the elements of a string.  
+### Review Breadth First Search Procedure
 
-Ok, so the first step is to choose an example like "pizza".  So to print out all of the elements of pizza. We would just write out:
+In this section we will translate our breadth first search algorithm into code.  So let's take another look at our graph.  
 
-```javascript
+![](https://s3-us-west-2.amazonaws.com/curriculum-content/graphedstops.png)
 
-function printString(string){
-  console.log(string[0], string[1], string[2], string[3], string[4])
-}
+In breadth first search, we explore the first vertex, and visit the adjacent vertices adding each one to a queue in turn.  Then we remove the first vertex added to the queue and explore it.
 
-printString("pizza")
-```
+![](https://s3-us-west-2.amazonaws.com/curriculum-content/algorithms/subwaydistance1.png)
 
-Now we ask if we can perform this operation, and also use the function printString.  Well we see that we can.  Print a string seems to be the same thing as printing all but the last letter of a string and then printing the final letter.  
+Let's go back to our representation of our graph and see if we can make more progress translating this into code.
+
+### Another Shot at the code
 
 ```javascript
+let edges = [
+	['14th&6th', '23rd&6th'],
+	['23rd&6th', '34th&6th'],
+	['34th&6th', '28th&Bwy'],
+	['28th&Bwy', '23rd&Bwy'],
+	['23rd&Bwy', '14th&Lex'],
+	['14th&Lex', '23rd&Lex']
+]
 
-function printString(string){
-  let substring = string.substring(1, string.length)
-  console.log(string[0])
-  printString(substring)
-}
-
-printString("pizza")
+let vertices = [
+  {name: '34th&6th', distance: null, predecessor: null},
+  {name: '23rd&6th', distance: null, predecessor: null},
+  {name: '14th&6th', distance: null, predecessor: null},
+  {name: '28th&Bwy', distance: null, predecessor: null},
+  {name: '23rd&Bwy', distance: null, predecessor: null},
+  {name: '14th&Lex', distance: null, predecessor: null},
+  {name: '23rd&Lex', distance: null, predecessor: null},
+]
 ```
 
-Now there is only one thing left to do, which is find the base case.  Well the stopping point should be when there is only one letter left in the string.  At that point, you can just print out the string.  So this gives us:
+What's a good summary of our procedure?  Add a vertex to the queue.  Then we remove the first vertex added and visit the adjacent vertices.  As each is visited, add each vertex to the queue.  Then continue the process exploring each vertex explored in turn.
 
-```javascript
+Let's translate this summary into pseudocode.
 
-function printString(string){
-  console.log(string[0])
-  if(string.length > 1){
-    let substring = string.substring(1, string.length)
-    printString(substring)
-  } else{
-    return true
-  }
-}
+> Note: Pseudocode is code that does not actually work, but reflects our thought process.
+
+Give the pseudocode a shot, it shouldn't take that long.
+
+You may get to something like the following:
+
+```text
+	rootNode = vertices[0]
+	queue = []
+	addVertexToQueue(rootNode)
+		// queue = [rootNode]
+	while(!queue.length == 0) {
+	adjacentVertices = findAdjacent(queue.last)
+		for vertex in adjacentVertices {
+			markDistanceAndPredecessor(vertex)
+			addToQueue(vertex)
+		}
+	}
 
 ```
 
-Now that we think we have a working solution, we try it out in the console with some examples, and after it looks good we move it over to our codebase.  
+So we can start to see some methods forming.  So now we write the following methods:
 
-2. Write out a recursive function to reverse a string.
-3. Write out a recursive function to see if a word is a palindrome.
+`findAdjacent`
 
-Arrays
-Arrays are another type of recursive data structure.  This is because properties of an array generally can be thought of as combination of the properties of a subarray and a final element.
+`markDistanceAndPredecessor`
 
-1.  Given an array and an index, write a recursive function to add up the elements of an array
-2. Write a recursive function to find the largest integer in an array
-3. Write out the function include to see if an array includes a given element
+`addToQueue`
+
+You can write these methods, and then complete our breadth first search algorithm by passing the tests in this lab.
