@@ -43,7 +43,7 @@ What's a good summary of our procedure?  Add a vertex to the queue.  Then we rem
 
 Let's translate this summary into pseudocode.
 
-> Note: Pseudocode is code that does not actually work, but reflects our thought process.
+> Note: Pseudocode is code that may not actually work, but reflects our thought process.
 
 Give the pseudocode a shot, it shouldn't take that long.
 
