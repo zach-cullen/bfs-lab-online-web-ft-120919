@@ -1,14 +1,3 @@
-let edges = [
-	['14th&6th', '23rd&6th'],
-	['23rd&6th', '34th&6th'],
-	['34th&6th', '28th&Bwy'],
-	['28th&Bwy', '23rd&Bwy'],
-	['23rd&Bwy', '14th&Lex'],
-	['14th&Lex', '23rd&Lex'],
-	['23rd&Lex', '28th&Lex'],
-	['28th&Lex', '33rd&Lex']
-]
-
 function bfs(startingNode, vertices, adjacencyList){
   let discovered = [startingNode]
   while(discovered.length != 0){
@@ -29,6 +18,8 @@ function findAdjacent(nodeName,  vertices, edges){
     })[0]
   }).map(function(name){
     return findNode(name, vertices)
+  }).filter(function(node){
+    return node.distance == null;
   })
 }
 
