@@ -72,4 +72,4 @@ So we can start to see some methods forming.  So now we write the following meth
 
 `addToQueue`
 
-You can write these methods, and then complete our breadth first search algorithm by passing the tests in this lab.
+You can write these methods, and then complete our breadth first search algorithm which returns a list of vertices in the order they are visited.  Use the tests in the lab to guide you through.
