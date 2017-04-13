@@ -6,7 +6,9 @@
 
 ### Review Breadth First Search Procedure
 
-In this section we will translate our breadth first search algorithm into code.  So let's take another look at our graph.  
+In this section we will translate our breadth first search algorithm into code.  We will work towards a function called bfs that returns a list of vertices in the order they are first visited.  We'll provide some guidance along the way.  
+
+So let's take another look at our graph.  
 
 ![](https://s3-us-west-2.amazonaws.com/curriculum-content/graphedstops.png)
 
@@ -47,7 +49,7 @@ Let's translate this summary into pseudocode.
 
 Give the pseudocode a shot, it shouldn't take that long.
 
-You may get to something like the following: 
+You may get to something like the following:
 
 ```text
 	rootNode = vertices[0]
@@ -61,7 +63,7 @@ You may get to something like the following:
 			addToQueue(vertex)
 		}
 	}
-	
+
 ```
 
 So we can start to see some methods forming.  So now we write the following methods:
