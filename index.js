@@ -1,11 +1,15 @@
-function bfs(startingNode, vertices, adjacencyList){
+function bfs(startingNode, vertices, edges){
+  startingNode.distance = 0
   let discovered = [startingNode]
+  let discoverOrder = [startingNode]
   while(discovered.length != 0){
     let currentNode = discovered.shift()
     let adjacentNodes = findAdjacent(currentNode.name, vertices, edges)
+    discoverOrder = discoverOrder.concat(adjacentNodes);
     markDistanceAndPredecessor(currentNode, adjacentNodes)
-    discovered.concat(adjacentNodes)
+    discovered = discovered.concat(adjacentNodes)
   }
+  return discoverOrder
 }
 
 // need to write a test for non-discovered nodes
