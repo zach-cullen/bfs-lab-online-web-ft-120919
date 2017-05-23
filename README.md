@@ -55,13 +55,13 @@ You may get to something like the following:
 	addVertexToQueue(rootNode)
 		// queue = [rootNode]
 	while(!queue.length == 0) {
-	adjacentVertices = findAdjacent(queue.last)
+		let firstNode = queue.shift()
+	adjacentVertices = findAdjacent(firstNode)
 		for vertex in adjacentVertices {
 			markDistanceAndPredecessor(vertex)
 			addToQueue(vertex)
 		}
 	}
-
 ```
 
 So we can start to see some methods forming.  So now we write the following methods:
