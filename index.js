@@ -32,7 +32,7 @@ function bfs(rootNode, vertices, edges){
   
   while (queue.length > 0) {
     let currentNode = queue.shift()
-    let adjacents = findAdjacent(currentNode, vertices, edges)
+    let adjacents = findAdjacent(currentNode.name, vertices, edges)
     markDistanceAndPredecessor(currentNode, adjacents)
     queue = queue.concat(adjacents)
     visited = visited.concat(adjacents)
